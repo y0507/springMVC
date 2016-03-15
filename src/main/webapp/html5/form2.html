@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/angular1.5/angular.js"></script>
+</head>
+<body ng-app="login">
+
+<form name="formLogin" class="col-sm-offset-4 col-sm-4" fole="form" autocomplete="on" ng-controller="loginController" />
+    <input type="text" name="txtName" ng-model="name" class="form-control input-lg" placeholder="请输入用户名" required autofocus />
+    <input type="password" name="txtPwd" ng-model="pwd" class="form-control input-lg" placeholder="请输入密码" required /><br>
+    <button class="btn-lg btn-primary btn-block"  ng-click="submit()">登录</button>
+    <alert ng-repeat="a in alerts" type="a.type" close="closeAlert($index)">{{a.msg}}</alert>
+</form>
+
+
+<script src="../js/angular1.5/angular.js"></script>
+
+<script>
+    //var app = angular.module('login',['ui.bootstrap']);
+    /*app.controller('loginController',function($scope){
+
+    });*/
+
+    angular.module('login',['ui.bootstrap']);
+    function loginController($scope){
+        $scope.alerts = [];
+
+        $scope.submit = function(){
+            if($scope.formLogin.txtName.$invalid){
+                $scope.alerts.push({type:'danger',msg:'用户名不能为空！'});
+            }
+            if($scope.formLogin.txtPwd.$invalid){
+                $scope.alerts.push({type:'danger',msg:'密码不能为空！'});
+            }
+
+            if($scope.alerts.length){
+                return;
+            }
+
+            $scope.alerts =[{type:'success',msg:'登录成功'}];
+
+
+        };
+
+        $scope.closeAlert = function(index){
+            $scope.alerts.splice(index,1);
+        };
+    }
+</script>
+</body>
+</html>

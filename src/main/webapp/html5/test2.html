@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>表格</title>
+    <script src="../js/angular1.5/angular.js"></script>
+
+    <style>
+        table,th,td{
+            border:1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table tr:nth-child(odd){
+            background-color: #009900;
+        }
+
+        table tr:nth-child(even){
+            background-color: #525D76;
+        }
+    </style>
+
+</head>
+<body>
+<div ng-app="myApp" ng-controller="customersCtrl">
+    <table>
+         <tr ng-repeat="x in names | orderBy:'Country'"><!--排序显示，可以使用 orderBy 过滤器:排序-->
+             <td>{{ $index + 1 }}</td>  <!--显示序号 ($index)-->
+             <td>{{ x.Name}}</td>
+             <td>{{x.Country | uppercase }}</td> <!--使用 uppercase 过滤器转换为大写:-->
+         </tr>
+
+    </table>
+</div>
+
+<script>
+    var app = angular.module('myApp',[]);
+    app.controller('customersCtrl',function($scope,$http){
+        $http.get("http://localhost:8080/json/customers.json").success(function(response){
+            $scope.names =response.records;
+        });
+    });
+
+</script>
+</body>
+</html>

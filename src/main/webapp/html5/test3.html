@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>表格</title>
+    <script src="../js/angular1.5/angular.js"></script>
+
+    <style>
+        table,th,td{
+            border:1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table tr:nth-child(odd){
+            background-color: #009900;
+        }
+
+        table tr:nth-child(even){
+            background-color: #525D76;
+        }
+    </style>
+
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    <p>现在时间：</p>
+    <h1>{{theTime}}</h1>
+</div>
+
+<script>
+    var app = angular.module('myApp',[]);
+    app.controller('myCtrl',function($scope,$interval){
+        $scope.theTime = new Date().toLocaleTimeString();
+        $interval(function(){
+            $scope.theTime = new Date().toLocaleTimeString();
+        },1000);
+    });
+
+</script>
+</body>
+</html>

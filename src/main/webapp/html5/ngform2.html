@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" >
+
+    <script src="/js/angular1.5/angular.js"></script>
+</head>
+<body>
+<ng-form name="outForm">
+    <ng-form name="innerForm" ng-repeat="file in doc.files">
+        <button ng-disabled="innerForm.$invalid">Save Inner</button>
+    </ng-form>
+    <button ng-disabled="outForm.$invalid || innerForm.$invalid">Save out</button>
+</ng-form>
+</body>
+</html>
